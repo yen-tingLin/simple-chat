@@ -32,6 +32,11 @@ public class ServerConnection {
     // send message to every connected clients
     private static void broadcast(String message) {
 
+        for(int i = 0; i < clients.size(); i++) {
+            ClientInfo client = clients.get(i);
+            send(message, client.getAddress(), client.getPort());
+        }
+
     };
 
     // send message to individual connected clients
