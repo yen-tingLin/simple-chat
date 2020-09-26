@@ -4,7 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public class ServerConnectionImp {
+public class ServerConnection {
 
     private static DatagramSocket socket;
     private static boolean isRunning;
