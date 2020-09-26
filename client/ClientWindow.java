@@ -3,6 +3,7 @@ package client;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
@@ -43,8 +44,10 @@ public class ClientWindow {
 	 */
 	public ClientWindow() {
 		initialize();
+		
+		String name = JOptionPane.showInputDialog("enter your name");
 		// same as the port number that pass to server start()
-		client = new Client("localhost", 5477);
+		client = new Client(name, "localhost", 5477);
 	}
 
 	/**
