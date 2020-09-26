@@ -61,7 +61,7 @@ public class ServerConnection {
 
     // create a new thread which waits for messages from clients
     private static void listen() {
-        Thread listener = new Thread("Thread listener") {
+        Thread listener = new Thread("Server listener") {
             public void run() {
                 try {
                     while(isRunning) {
@@ -90,8 +90,8 @@ public class ServerConnection {
     }
 
     /* server command list :
-     *   'conn: [name]' : connect client to server
-     *   'disconn: [id]' : disconnect client from server
+     *   '-conn: [name]' : connect client to server
+     *   '-disconn: [id]' : disconnect client from server
      */
     private static boolean isCommand(String message, DatagramPacket packet) {
         

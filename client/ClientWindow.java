@@ -80,8 +80,10 @@ public class ClientWindow {
 //			}
 //		});
 		btnSend.addActionListener(actionEvent -> {
-			client.sendFromClient(messageField.getText());
-			messageField.setText("");
+			if(!messageField.getText().equals("")) {
+				client.sendFromClient(messageField.getText());
+				messageField.setText("");				
+			} 
 		});
 		panel.add(btnSend);			
 		

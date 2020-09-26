@@ -4,7 +4,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import server.ClientInfo;
 
 
 public class Client {
@@ -54,7 +53,8 @@ public class Client {
             
         } catch(Exception e) {
             e.printStackTrace();
-        }		
+        }
+        		
 	}
 	
     // create a new thread which waits for messages from clients	
