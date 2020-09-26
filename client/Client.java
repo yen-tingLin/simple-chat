@@ -14,11 +14,13 @@ public class Client {
     // server's port
     private int port;
     private boolean isRunning;
+    private String name;
 	
 	public Client(String name, String address, int port) {
 		try {
 			this.address = InetAddress.getByName(address);
 			this.port = port;
+			this.name = name;
 			
 			// client dosen't need a specific port, system will
 			// randomly assign one for it
@@ -36,6 +38,10 @@ public class Client {
 	public void sendFromClient(String message) 
 	{
         try {
+        	if(!message.startsWith("-")) {
+        		message = name + " says : " + message;
+        	}
+        	
             // for client's benefit to mark where is the end to the 
             // message from server
             message += "-over";

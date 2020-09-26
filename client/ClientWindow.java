@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 public class ClientWindow {
 
@@ -60,6 +61,7 @@ public class ClientWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setTitle("Chat Program\n");
+		textArea.setBackground(Color.BLACK);
 		
 		textArea.setEnabled(false);
 		JScrollPane scrollPane = new JScrollPane(textArea);
@@ -73,9 +75,13 @@ public class ClientWindow {
 		messageField.setColumns(50);
 		
 		JButton btnSend = new JButton("Send");
-		btnSend.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
+//		btnSend.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//			}
+//		});
+		btnSend.addActionListener(actionEvent -> {
+			client.sendFromClient(messageField.getText());
+			messageField.setText("");
 		});
 		panel.add(btnSend);			
 		
