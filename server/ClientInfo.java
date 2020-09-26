@@ -10,8 +10,8 @@ public class ClientInfo {
     private int id;
     private String name;
 
-    public ClientInfo(InetAddress address,
-                    int port, int id, String name) 
+    public ClientInfo(String name, int id,
+                     InetAddress address, int port) 
     {
         this.address = address;
         this.port = port;
