@@ -121,9 +121,5 @@ public class ServerConnection {
         isRunning = false;
     };
 
-    // close the server
-    private static void close() {
-
-    };
 
 }
