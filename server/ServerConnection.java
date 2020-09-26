@@ -32,11 +32,15 @@ public class ServerConnection {
     private static void send(String message, InetAddress address, int port) 
     {
         try {
+            // for client's benefit to mark where is the end to the 
+            // message from server
             message += "//over";
             byte[] messageData = message.getBytes();
             DatagramPacket dataPacket = new DatagramPacket(
                         messageData, messageData.length, address, port);
             socket.send(dataPacket);
+            System.out.println("[Server] send message to " + 
+                        address.getHostAddress() + " : " + port);
             
         } catch(Exception e) {
             e.printStackTrace();
