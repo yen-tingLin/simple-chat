@@ -8,40 +8,40 @@ import server.ClientInfo;
 
 
 public class Client {
-	
-	private DatagramSocket socket;
+    
+    private DatagramSocket socket;
     private InetAddress address;
     // server's port
     private int port;
     private boolean isRunning;
     private String name;
-	
-	public Client(String name, String address, int port) {
-		try {
-			this.address = InetAddress.getByName(address);
-			this.port = port;
-			this.name = name;
-			
-			// client dosen't need a specific port, system will
-			// randomly assign one for it
-			socket = new DatagramSocket();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		isRunning = true;
-		receiveByClient();
-		sendFromClient("-conn: " + name);
-	}
-	
-	public void sendFromClient(String message) 
-	{
+    
+    public Client(String name, String address, int port) {
         try {
-        	if(!message.startsWith("-")) {
-        		message = name + " says : " + message;
-        	}
-        	
+            this.address = InetAddress.getByName(address);
+            this.port = port;
+            this.name = name;
+            
+            // client dosen't need a specific port, system will
+            // randomly assign one for it
+            socket = new DatagramSocket();
+            
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        isRunning = true;
+        receiveByClient();
+        sendFromClient("-conn: " + name);
+    }
+    
+    public void sendFromClient(String message) 
+    {
+        try {
+            if(!message.startsWith("-")) {
+                message = name + " says : " + message;
+            }
+            
             // for client's benefit to mark where is the end to the 
             // message from server
             message += "-over";
@@ -58,10 +58,10 @@ public class Client {
         } 
         
 
-	}
-	
+    }
+    
     // create a new thread which waits for messages from clients	
-	public void receiveByClient() {
+    public void receiveByClient() {
         Thread listener = new Thread("Client listener") {
             public void run() {
                 try {
@@ -79,7 +79,7 @@ public class Client {
                         // manage message
                         if(!isCommand(message, dataPacket)) {
                             ClientWindow.printToConsole("receive message: <" + message + "> from " + 
-                            			dataPacket.getAddress() + ": " + dataPacket.getPort());
+                                        dataPacket.getAddress() + ": " + dataPacket.getPort());
                             
                         } 
                     }
@@ -91,13 +91,13 @@ public class Client {
             }
         };
         listener.start();
-	}
-	
+    }
+    
     private static boolean isCommand(String message, DatagramPacket packet) {
         
         if(message.startsWith("-conn: ")) {
             // run connection code
-        	
+            
 
         } else if(message.startsWith("-disconn: ")) {
             // run disconnection code
@@ -106,6 +106,6 @@ public class Client {
 
         return false;
     }
-	
-	
+    
+    
 }

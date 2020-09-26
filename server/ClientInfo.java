@@ -11,7 +11,7 @@ public class ClientInfo {
     private String name;
 
     public ClientInfo(String name, int id,
-                     InetAddress address, int port) 
+                    InetAddress address, int port) 
     {
         this.address = address;
         this.port = port;

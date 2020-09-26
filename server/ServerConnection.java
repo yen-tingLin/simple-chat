@@ -18,7 +18,7 @@ public class ServerConnection {
     // start the server up
     public static void start(int port) {
         try {
-        	// server needs a specific port
+            // server needs a specific port
             socket = new DatagramSocket(port);
 
             isRunning = true;
@@ -90,9 +90,9 @@ public class ServerConnection {
     }
 
     /* server command list :
-     *   '-conn: [name]' : connect client to server
-     *   '-disconn: [id]' : disconnect client from server
-     */
+    *   '-conn: [name]' : connect client to server
+    *   '-disconn: [id]' : disconnect client from server
+    */
     private static boolean isCommand(String message, DatagramPacket packet) {
         
         if(message.startsWith("-conn: ")) {
