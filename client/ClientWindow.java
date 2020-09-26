@@ -18,6 +18,8 @@ public class ClientWindow {
 	private JFrame frame;
 	private JTextField messageField;
 	private static JTextArea textArea = new JTextArea();
+	
+	private Client client;
 
 	/**
 	 * Launch the application.
@@ -41,6 +43,8 @@ public class ClientWindow {
 	 */
 	public ClientWindow() {
 		initialize();
+		// same as the port number that pass to server start()
+		client = new Client("localhost", 5477);
 	}
 
 	/**
