@@ -18,6 +18,7 @@ public class ServerConnection {
     // start the server up
     public static void start(int port) {
         try {
+        	// server needs a specific port
             socket = new DatagramSocket(port);
 
             isRunning = true;
@@ -50,8 +51,8 @@ public class ServerConnection {
             DatagramPacket dataPacket = new DatagramPacket(
                         messageData, messageData.length, address, port);
             socket.send(dataPacket);
-            System.out.println("[Server] send message to " + 
-                        address.getHostAddress() + " : " + port);
+            System.out.println("[Server] send message: " + message + " to " + 
+                        address.getHostAddress() + ": " + port);
             
         } catch(Exception e) {
             e.printStackTrace();
@@ -89,26 +90,27 @@ public class ServerConnection {
     }
 
     /* server command list :
-     *   '-conn: [name]' : connect client to server
-     *   '-disconn: [id]' : disconnect client from server
+     *   'conn: [name]' : connect client to server
+     *   'disconn: [id]' : disconnect client from server
      */
     private static boolean isCommand(String message, DatagramPacket packet) {
         
         if(message.startsWith("-conn: ")) {
             // run connection code
-            String name = message.substring(message.indexOf(": " + 1));
+            String name = message.substring(message.indexOf(": ")+2, message.length());
 
+            // packet.getPort() : client's port is randomly assigned by system
             ClientInfo newClient = new ClientInfo(
                     name, clientID++, packet.getAddress(), packet.getPort());
             clients.add(newClient);
 
-            broadcast(name + " connected, Welcome !");
+            broadcast(name + " connected ");
 
             return true;
 
         } else if(message.startsWith("-disconn: ")) {
             // run disconnection code
-            clients.removeIf(client -> client.getId().equals(id));
+            // clients.removeIf(client -> client.getId().equals(id));
         }
 
         return false;
