@@ -32,9 +32,14 @@ public class ServerConnection {
     private static void send(String message, InetAddress address, int port) 
     {
         try {
-
+            message += "//over";
+            byte[] messageData = message.getBytes();
+            DatagramPacket dataPacket = new DatagramPacket(
+                        messageData, messageData.length, address, port);
+            socket.send(dataPacket);
+            
         } catch(Exception e) {
-
+            e.printStackTrace();
         }
     };
 
