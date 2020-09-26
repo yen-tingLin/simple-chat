@@ -116,7 +116,7 @@ public class ServerConnection {
 
     // stop the server without closing the program
     public static void stop() {
-
+        isRunning = false;
     };
 
     // close the server
