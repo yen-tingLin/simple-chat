@@ -40,7 +40,31 @@ public class ServerConnection {
 
     // create a new thread which waits for messages from clients
     private static void listen() {
+        Thread listener = new Thread("Thread listener") {
+            public void run() {
+                try {
+                    while(isRunning) {
+                        // put received data into dataPacket, and dataPacket then write  
+                        // data into clientData byte array                        
+                        byte[] clientData = new byte[1024];
+                        DatagramPacket dataPacket = new DatagramPacket(clientData, clientData.length);
+                        socket.receive(dataPacket);
 
+                        // extract message from data
+                        String dataToStr = new String(clientData);
+                        String message = dataToStr.substring(0, dataToStr.indexOf("//over"));
+
+                        // manage message
+                        broadcast(message);
+                        
+                    }
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        listener.start();
     }
 
     // stop the server without closing the program
